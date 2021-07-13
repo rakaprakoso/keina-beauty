@@ -32,10 +32,17 @@
             background: #a0aec0;
         }
     </style>
+    <link rel="stylesheet" href="/css/app.css">
 </head>
 <body class="overflow-x-hidden antialiased">
     <!-- Header Section -->
-    <header class="relative z-50 w-full h-24">
+
+    <div id="index">
+    </div>
+
+    <div id="header">
+    </div>
+    {{-- <header class="relative z-50 w-full h-24">
         <div
             class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0">
 
@@ -126,7 +133,8 @@
             </div>
 
         </div>
-    </header>
+    </header> --}}
+
     <!-- End Header Section-->
     <div id="example"></div>
     <!-- BEGIN HERO SECTION -->
