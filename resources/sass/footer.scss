@@ -1,0 +1,12 @@
+footer{
+    .footer-wrapper{
+        @apply px-5;
+    }
+    .top-part{
+        @apply py-7;
+        .logo img{
+            width: 200px;
+            height: auto;
+        }
+    }
+}

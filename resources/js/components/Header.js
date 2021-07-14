@@ -24,7 +24,7 @@ export const Header = () => {
                 <div className="top-part">
                     <div className="site-branding">
                         <div className="site-title">
-                            <a href="https://keinabeauty.com/" className="remove_underline">
+                            <a href="/" className="remove_underline">
                                 <div className="logo">
                                     <img src="https://keinabeauty.com/wp-content/uploads/2021/02/Logo-Big.png" alt="Keina Beauty"/>
                                 </div>
@@ -50,6 +50,6 @@ export const Header = () => {
     )
 }
 // export default withRouter(Header);
-if (document.getElementById('header')) {
-    ReactDOM.render(<Header />, document.getElementById('header'));
-}
+// if (document.getElementById('header')) {
+//     ReactDOM.render(<Header />, document.getElementById('header'));
+// }

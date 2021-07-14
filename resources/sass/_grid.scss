@@ -1,0 +1,6 @@
+.row{
+    @apply flex flex-wrap overflow-hidden lg:-mx-4;
+    .col-6{
+        @apply w-full overflow-hidden lg:px-4 lg:w-1/2;
+    }
+}

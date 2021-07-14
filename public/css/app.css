@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
+@import url(https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);
 /*! tailwindcss v2.2.4 | MIT License | https://tailwindcss.com */
 
 /*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -357,7 +358,7 @@ ul {
  */
 
 html {
-  font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
+  font-family: Poppins, Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
   line-height: 1.5; /* 2 */
 }
 
@@ -751,40 +752,6 @@ select{
 
 [type='file']:focus{
   outline: 1px auto -webkit-focus-ring-color;
-}
-
-.container{
-  width: 100%;
-}
-
-@media (min-width: 640px){
-  .container{
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px){
-  .container{
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px){
-  .container{
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px){
-  .container{
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px){
-  .container{
-    max-width: 1536px;
-  }
 }
 
 .sr-only{
@@ -22518,7 +22485,7 @@ select{
 }
 
 .font-sans{
-  font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: Poppins, Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .font-serif{
@@ -32113,6 +32080,32 @@ select{
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px){
+  .row{
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+}
+
+.row .col-6 {
+  width: 100%;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px){
+  .row .col-6{
+    width: 50%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 .divider {
   border-top: 1px solid;
   width: 100%;
@@ -32125,8 +32118,8 @@ select{
 }
 
 #header header .header-wrapper {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 #header header .top-part, #header header .bottom-part{
@@ -32159,41 +32152,86 @@ select{
   padding-bottom: 0.5rem;
 }
 
+footer .footer-wrapper {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+footer .top-part {
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+}
+
+footer .top-part .logo img {
+  width: 200px;
+  height: auto;
+}
+
+.hero {
+  position: relative;
+  height: auto;
+  width: 100%;
+}
+
+.hero.hero-100 {
+  height: 100vh;
+}
+
+.hero.hero-90 {
+  height: 90vh;
+}
+
+.hero.hero-75 {
+  height: 75vh;
+}
+
+.hero .hero-background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.hero .hero-background:before {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  --tw-bg-opacity: 1;
+  background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
+  opacity: 0.5;
+  content: "";
+}
+
+.hero .hero-background video {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.hero .hero-content {
+  width: 100%;
+}
+
+.hero .hero-content .content-container {
+  width: 50%;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.hero .hero-content .title {
+  font-size: 3.75rem;
+  line-height: 1;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hero .hero-content .sub-title {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
 @media (min-width: 640px){
-  .sm\:container{
-    width: 100%;
-  }
-
-  @media (min-width: 640px){
-    .sm\:container{
-      max-width: 640px;
-    }
-  }
-
-  @media (min-width: 768px){
-    .sm\:container{
-      max-width: 768px;
-    }
-  }
-
-  @media (min-width: 1024px){
-    .sm\:container{
-      max-width: 1024px;
-    }
-  }
-
-  @media (min-width: 1280px){
-    .sm\:container{
-      max-width: 1280px;
-    }
-  }
-
-  @media (min-width: 1536px){
-    .sm\:container{
-      max-width: 1536px;
-    }
-  }
-
   .sm\:sr-only{
     position: absolute;
     width: 1px;
@@ -53859,7 +53897,7 @@ select{
   }
 
   .sm\:font-sans{
-    font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Poppins, Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   .sm\:font-serif{
@@ -63383,40 +63421,6 @@ select{
 }
 
 @media (min-width: 768px){
-  .md\:container{
-    width: 100%;
-  }
-
-  @media (min-width: 640px){
-    .md\:container{
-      max-width: 640px;
-    }
-  }
-
-  @media (min-width: 768px){
-    .md\:container{
-      max-width: 768px;
-    }
-  }
-
-  @media (min-width: 1024px){
-    .md\:container{
-      max-width: 1024px;
-    }
-  }
-
-  @media (min-width: 1280px){
-    .md\:container{
-      max-width: 1280px;
-    }
-  }
-
-  @media (min-width: 1536px){
-    .md\:container{
-      max-width: 1536px;
-    }
-  }
-
   .md\:sr-only{
     position: absolute;
     width: 1px;
@@ -85082,7 +85086,7 @@ select{
   }
 
   .md\:font-sans{
-    font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Poppins, Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   .md\:font-serif{
@@ -94606,40 +94610,6 @@ select{
 }
 
 @media (min-width: 1024px){
-  .lg\:container{
-    width: 100%;
-  }
-
-  @media (min-width: 640px){
-    .lg\:container{
-      max-width: 640px;
-    }
-  }
-
-  @media (min-width: 768px){
-    .lg\:container{
-      max-width: 768px;
-    }
-  }
-
-  @media (min-width: 1024px){
-    .lg\:container{
-      max-width: 1024px;
-    }
-  }
-
-  @media (min-width: 1280px){
-    .lg\:container{
-      max-width: 1280px;
-    }
-  }
-
-  @media (min-width: 1536px){
-    .lg\:container{
-      max-width: 1536px;
-    }
-  }
-
   .lg\:sr-only{
     position: absolute;
     width: 1px;
@@ -116305,7 +116275,7 @@ select{
   }
 
   .lg\:font-sans{
-    font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Poppins, Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   .lg\:font-serif{
@@ -125829,40 +125799,6 @@ select{
 }
 
 @media (min-width: 1280px){
-  .xl\:container{
-    width: 100%;
-  }
-
-  @media (min-width: 640px){
-    .xl\:container{
-      max-width: 640px;
-    }
-  }
-
-  @media (min-width: 768px){
-    .xl\:container{
-      max-width: 768px;
-    }
-  }
-
-  @media (min-width: 1024px){
-    .xl\:container{
-      max-width: 1024px;
-    }
-  }
-
-  @media (min-width: 1280px){
-    .xl\:container{
-      max-width: 1280px;
-    }
-  }
-
-  @media (min-width: 1536px){
-    .xl\:container{
-      max-width: 1536px;
-    }
-  }
-
   .xl\:sr-only{
     position: absolute;
     width: 1px;
@@ -147528,7 +147464,7 @@ select{
   }
 
   .xl\:font-sans{
-    font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Poppins, Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   .xl\:font-serif{
@@ -157052,40 +156988,6 @@ select{
 }
 
 @media (min-width: 1536px){
-  .\32xl\:container{
-    width: 100%;
-  }
-
-  @media (min-width: 640px){
-    .\32xl\:container{
-      max-width: 640px;
-    }
-  }
-
-  @media (min-width: 768px){
-    .\32xl\:container{
-      max-width: 768px;
-    }
-  }
-
-  @media (min-width: 1024px){
-    .\32xl\:container{
-      max-width: 1024px;
-    }
-  }
-
-  @media (min-width: 1280px){
-    .\32xl\:container{
-      max-width: 1280px;
-    }
-  }
-
-  @media (min-width: 1536px){
-    .\32xl\:container{
-      max-width: 1536px;
-    }
-  }
-
   .\32xl\:sr-only{
     position: absolute;
     width: 1px;
@@ -178751,7 +178653,7 @@ select{
   }
 
   .\32xl\:font-sans{
-    font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Poppins, Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   .\32xl\:font-serif{

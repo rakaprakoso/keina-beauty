@@ -1,0 +1,37 @@
+.hero{
+    @apply w-full h-auto relative;
+    &.hero-100{
+        @apply h-screen;
+    }
+    &.hero-90{
+        height:90vh;
+    }
+    &.hero-75{
+        height:75vh;
+    }
+    .hero-background{
+        @apply absolute w-full h-full;
+        z-index: -1;
+        &:before{
+            @apply bg-gray-50 opacity-50 w-full h-full absolute;
+            content:"";
+        }
+    }
+    .hero-background{
+        video{
+            @apply w-full h-full object-cover;
+        }
+    }
+    .hero-content{
+        @apply w-full;
+        .content-container{
+            @apply px-10 w-1/2;
+        }
+        .title{
+            @apply text-6xl font-bold uppercase;
+        }
+        .sub-title{
+            @apply text-3xl;
+        }
+    }
+}
