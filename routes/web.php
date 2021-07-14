@@ -17,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::view('/{path?}', 'index');
+Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function () {
+    Route::view('/{path?}', 'index');
+});
+
 // Route::view('/{any}', 'index')->where('any', '.*');
 // Route::get('/', [PageController::class, 'home']);
 
