@@ -37,7 +37,7 @@ export const Header = () => {
                     <nav>
                         <ul>
                             {dataHeader.map((item, i)=>(
-                                <li>
+                                <li className="hvr hvr-underline-from-center">
                                     <a href={item.path}>{item.label}</a>
                                 </li>
                             ))

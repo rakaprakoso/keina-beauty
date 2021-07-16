@@ -8,5 +8,25 @@ footer{
             width: 200px;
             height: auto;
         }
+        .social-container{
+            a{
+                @apply bg-primaryDark mx-1 mb-2 text-gray-50
+                inline-block align-middle text-center rounded-full;
+
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 16px;
+                svg{
+                    display: inherit;
+                }
+                &:first-child{
+                    margin-left: 0px;
+                }
+                &:last-child{
+                    margin-right: 0px;
+                }
+            }
+        }
     }
 }

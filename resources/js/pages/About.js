@@ -1,10 +1,13 @@
 import React from 'react';
+import Page from '../page';
 
 function About(props) {
     return (
-        <div className="container">
-            About
-        </div>
+        <Page title="About">
+            <div className="container">
+                About
+            </div>
+        </Page>
     );
 }
 

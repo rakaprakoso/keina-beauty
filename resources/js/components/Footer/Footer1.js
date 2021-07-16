@@ -1,21 +1,22 @@
 import React from 'react'
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const Footer1 = () => {
     const socmedData = [
         {
             social: "Facebook",
             url: "http://facebook.com",
-            icon: "Facebook",
+            icon: <FaFacebookF/>,
         },
         {
             social: "Instagram",
             url: "http://Instagram.com",
-            icon: "Instagram",
+            icon: <FaInstagram/>,
         },
         {
             social: "Twitter",
             url: "http://Twitter.com",
-            icon: "Twitter",
+            icon: <FaTwitter/>,
         },
     ]
     return (
@@ -32,17 +33,16 @@ const Footer1 = () => {
                             </a>
 
                         </div>
-                        <div className="col-6">
-                            <ul>
+                        <div className="col-6 ml-auto flex justify-end">
+                            <div className="social-container">
+                                <div className="text-right">Follow Us</div>
                                 {socmedData.map((item, i) => (
-                                    <li key={i}>
-                                        <a href={item.url}>
-                                            {item.social}
-                                        </a>
-                                    </li>
+                                    <a key={i} href={item.url}>
+                                        {item.icon}
+                                    </a>
                                 ))
                                 }
-                            </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

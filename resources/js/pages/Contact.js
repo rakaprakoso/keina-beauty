@@ -1,10 +1,13 @@
 import React from 'react';
+import Page from '../page';
 
 function Contact(props) {
     return (
-        <div className="container">
-            Contact
-        </div>
+        <Page>
+            <div className="container">
+                Contact
+            </div>
+        </Page>
     );
 }
 
