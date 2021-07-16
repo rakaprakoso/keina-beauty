@@ -25,10 +25,15 @@ ul.slider {
     .carousel-nav{
         @apply z-10;
         position: absolute;
-        width:50px;
-        height: 50px;
+        width:36px;
+        height: 36px;
         top: 50%;
-        transform: translateY(-25px);
+        transform: translateY(-18px);
+        @screen lg{
+            width:50px;
+            height: 50px;
+            transform: translateY(-25px);
+        }
         &:before{
             content: "";
             @apply bg-gray-50 rounded-full shadow
@@ -53,6 +58,7 @@ ul.slider {
             transform: scale(0);
             z-index: 0;
             transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+
         }
         &.prev{
             left:15px;

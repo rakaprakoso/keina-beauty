@@ -102,7 +102,7 @@ const Hero1 = () => {
                 {heroData.map((item, i) => (
                     <div className="h-full">
                         <div className="hero-background">
-                            <div className="absolute w-full object-cover" style={{ zIndex: '-1' }}>
+                            <div className="absolute w-full h-full object-cover" style={{ zIndex: '-1' }}>
                                 <video
                                     autoPlay={true}
                                     loop={true}

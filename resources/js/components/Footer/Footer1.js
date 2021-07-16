@@ -6,17 +6,17 @@ const Footer1 = () => {
         {
             social: "Facebook",
             url: "http://facebook.com",
-            icon: <FaFacebookF/>,
+            icon: <FaFacebookF />,
         },
         {
             social: "Instagram",
             url: "http://Instagram.com",
-            icon: <FaInstagram/>,
+            icon: <FaInstagram />,
         },
         {
             social: "Twitter",
             url: "http://Twitter.com",
-            icon: <FaTwitter/>,
+            icon: <FaTwitter />,
         },
     ]
     return (
@@ -26,16 +26,17 @@ const Footer1 = () => {
                     <div className="row">
                         <div className="col-6">
 
-                            <a href="/" className="remove_underline">
-                                <div className="logo">
-                                    <img src="https://keinabeauty.com/wp-content/uploads/2021/02/Logo-Big.png" alt="Keina Beauty" />
-                                </div>
-                            </a>
+                            <div className="logo">
+                                <a href="/" className="remove_underline">
+                                    <img className="mx-auto lg:mx-0"
+                                    src="https://keinabeauty.com/wp-content/uploads/2021/02/Logo-Big.png" alt="Keina Beauty" />
+                                </a>
+                            </div>
 
                         </div>
-                        <div className="col-6 ml-auto flex justify-end">
+                        <div className="col-6 flex justify-center lg:justify-end">
                             <div className="social-container">
-                                <div className="text-right">Follow Us</div>
+                                <div className="text-center lg:text-right">Follow Us</div>
                                 {socmedData.map((item, i) => (
                                     <a key={i} href={item.url}>
                                         {item.icon}
@@ -46,7 +47,7 @@ const Footer1 = () => {
                         </div>
                     </div>
                 </div>
-                <div className="divider"/>
+                <div className="divider" />
                 <div className="bottom-part">
                     <div className="text-center text-sm py-4">
                         Copyright &copy; 2021

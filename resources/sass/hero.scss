@@ -25,13 +25,22 @@
     .hero-content{
         @apply w-full;
         .content-container{
-            @apply px-24 w-1/2;
+            @apply px-16 w-full;
+            @screen lg{
+                @apply px-24 w-1/2;
+            }
         }
         .title{
-            @apply text-6xl font-bold uppercase;
+            @apply text-3xl font-bold uppercase;
+            @screen lg{
+                @apply text-6xl;
+            }
         }
         .sub-title{
+            @apply text-xl;
+            @screen lg{
             @apply text-3xl;
+            }
         }
     }
     .carousel .slide{
