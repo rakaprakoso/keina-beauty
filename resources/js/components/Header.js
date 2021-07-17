@@ -13,7 +13,7 @@ export const Header = () => {
             label: 'Products'
         },
         {
-            path: '/join',
+            path: 'https://lindungihutan.com/keinabeauty',
             label: 'Join Campaign'
         },
     ]

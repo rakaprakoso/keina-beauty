@@ -24,7 +24,7 @@ const Footer1 = () => {
             <div className="footer-wrapper">
                 <div className="top-part">
                     <div className="row">
-                        <div className="col-6">
+                        <div className="col-lg-6">
 
                             <div className="logo">
                                 <a href="/" className="remove_underline">
@@ -34,7 +34,7 @@ const Footer1 = () => {
                             </div>
 
                         </div>
-                        <div className="col-6 flex justify-center lg:justify-end">
+                        <div className="col-lg-6 flex justify-center lg:justify-end">
                             <div className="social-container">
                                 <div className="text-center lg:text-right">Follow Us</div>
                                 {socmedData.map((item, i) => (

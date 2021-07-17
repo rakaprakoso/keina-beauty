@@ -3,6 +3,9 @@
 @import 'tailwindcss/utilities';
 @import 'hover.css/scss/hover';
 
+//Tabs
+@import 'react-tabs/style/react-tabs.css';
+
 //Swiper
 @import "swiper/swiper.min.css";
 @import "swiper/components/pagination/pagination.min.css";
@@ -21,6 +24,9 @@
 
 //grid
 @import 'grid';
+@import 'grid/mixin';
+
+@import 'button';
 
 //Base
 @import 'base';

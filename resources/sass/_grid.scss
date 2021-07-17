@@ -1,6 +1,18 @@
-.row{
-    @apply flex flex-wrap overflow-hidden lg:-mx-4;
-    .col-6{
-        @apply w-full overflow-hidden lg:px-4 lg:w-1/2;
-    }
+
+
+.row {
+    @apply flex flex-wrap overflow-hidden;
+    margin-left: ($spacing/-2);
+    margin-right: ($spacing/-2);
+    // .col-6{
+    //     @apply w-full overflow-hidden lg:px-4 lg:w-1/2;
+    // }
+
+
 }
+
+// @for $i from 1 through $columns {
+//     .col-#{$i} {
+//         width: (100% / ($columns / $i));
+//     }
+// }

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function () {
-    Route::view('/{path?}', 'index');
+    Route::view('/{path?}', 'index')->where('path', '([A-z\d\-\/_.]+)?');
 });
 
 // Route::view('/{any}', 'index')->where('any', '.*');

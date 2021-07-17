@@ -1,3 +1,16 @@
+.page-wrapper{
+    @apply px-5;
+    @screen lg{
+        @apply px-40;
+    }
+}
+.page-wrapper-wide{
+    @apply px-8;
+    @screen lg{
+        @apply px-44;
+    }
+}
+
 //Divider
 .divider {
     border-top: 1px solid;
@@ -71,4 +84,15 @@ ul.slider {
         }
     }
 
+}
+
+.embed-responsive {
+    position: relative;
+    overflow:hidden;
+    &.responsive-16by9{
+        padding-bottom:56.25%;
+    }
+    embed,img,video,iframe {
+        @apply absolute w-full h-full top-0;
+    }
 }
