@@ -85,7 +85,7 @@ const Product = () => {
                                 <TabPanel>
                                     <div className="full-description">
                                         <div className="row">
-                                            <div className="col-lg-6 flex items-center">
+                                            <div className="col-lg-8 flex items-center">
                                                 <div>
                                                     <h4>Mengapa Memilih Produk Kami?</h4>
                                                     <p>
@@ -109,8 +109,8 @@ const Product = () => {
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div className="col-lg-6 flex items-center">
-                                                <div className="px-0 lg:px-36 py-0 lg:py-3">
+                                            <div className="col-lg-4 flex items-center">
+                                                <div className="px-0 lg:px-10 py-0 lg:py-3">
                                                     <div className="row">
                                                         <div className="col-4">
                                                             <img src="https://keinabeauty.com/wp-content/uploads/2021/05/No-Additional-Fragrances-Green.png" alt="" />

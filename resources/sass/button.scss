@@ -5,4 +5,11 @@
         @apply inline-block;
         }
     }
+
+    &.btn-primary{
+        @apply bg-primary text-gray-50;
+    }
+    &.btn-outline-primary{
+        @apply text-primary border-primary border;
+    }
 }

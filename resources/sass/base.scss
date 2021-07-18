@@ -1,3 +1,9 @@
+#root{
+    min-height: 100vh;
+    display:flex;
+    flex-direction: column;
+}
+
 .page-wrapper{
     @apply px-5;
     @screen lg{
@@ -94,5 +100,38 @@ ul.slider {
     }
     embed,img,video,iframe {
         @apply absolute w-full h-full top-0;
+    }
+}
+
+.icon-hvr{
+    @apply relative;
+    &:hover:after {
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
+    &:after {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        height: -webkit-calc(100% + 20px);
+        height: calc(100% + 20px);
+        width: -webkit-calc(100% + 20px);
+        width: calc(100% + 20px);
+        border-radius: 100%;
+        background-color: rgba(0, 0, 0, 0.05);
+        transform: scale(0);
+        z-index: 0;
+        transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+    }
+}
+
+
+//FORM
+[type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
+    border-color: inherit;
+    &:focus{
+        @apply border-primary ring-primary;
     }
 }

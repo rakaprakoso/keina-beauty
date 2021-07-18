@@ -8,18 +8,33 @@
             @apply px-5;
         }
 
-        .top-part,
+        .top-part .head-content,
         .bottom-part {
-            @apply flex justify-center
+            @apply flex justify-center relative;
         }
 
         .top-part {
-            @apply py-4;
+
+            .head-content{
+                @apply my-4;
+            }
 
             .site-branding img {
                 height: 50px;
                 width: 200px;
                 object-fit: contain;
+            }
+            .icon-nav{
+                @apply absolute flex right-0 top-0 bottom-0;
+                a{
+                    padding: 13px;
+                    font-size:24px;
+                    @apply text-gray-500 inline-block;
+                }
+                li:last-child > a{
+                    padding-right:0;
+                }
+
             }
         }
 

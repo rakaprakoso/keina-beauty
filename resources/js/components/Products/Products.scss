@@ -3,16 +3,19 @@
     margin-right: -15px;
 
     &.column-4 .product-content{
-        @apply inline-block w-1/2 md:w-1/4;
+        @apply inline-block w-full md:w-1/2 lg:w-1/4;
     }
 }
 .product-content{
     padding-left: 15px;
     padding-right:15px;
 
-    @apply inline;
+    @apply inline-block mb-4;
     .image-wrap{
         @apply overflow-hidden relative rounded-sm;
+        img{
+            @apply w-full h-full;
+        }
     }
     .text-wrap{
         @apply my-0;
