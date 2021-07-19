@@ -14,11 +14,13 @@ require('laravel-mix-purgecss');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix
+    .js('resources/js/Client/app.js', 'public/js')
+    .js('resources/js/Admin/app.js', 'public/js/admin')
     .react()
     .sass('resources/sass/app.scss', 'public/css')
     .options({
-        postCss: [ tailwindcss('./tailwind.config.js') ],
+        postCss: [tailwindcss('./tailwind.config.js')],
     })
     // .purgeCss({
     //     enabled: mix.inProduction(),

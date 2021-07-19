@@ -31,6 +31,8 @@
         "tailwindcss": "^2.2.4"
     },
     "dependencies": {
+        "@popperjs/core": "^2.9.2",
+        "chart.js": "^3.4.1",
         "hover.css": "^2.3.2",
         "react-helmet": "^6.1.0",
         "react-icons": "^4.2.0",
