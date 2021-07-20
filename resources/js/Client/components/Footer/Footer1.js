@@ -1,6 +1,8 @@
 import React from 'react'
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
+import logo from "../../../Public/Logo Big.png"
+
 const Footer1 = () => {
     const socmedData = [
         {
@@ -29,7 +31,7 @@ const Footer1 = () => {
                             <div className="logo">
                                 <a href="/" className="remove_underline">
                                     <img className="mx-auto lg:mx-0"
-                                    src="https://keinabeauty.com/wp-content/uploads/2021/02/Logo-Big.png" alt="Keina Beauty" />
+                                    src={logo} alt="Keina Beauty" />
                                 </a>
                             </div>
 
