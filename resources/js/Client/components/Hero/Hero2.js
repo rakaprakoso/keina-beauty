@@ -28,7 +28,7 @@ const Hero2 = () => {
                         <div className="hero-background">
                             <div className="absolute w-full h-full object-cover" style={{ zIndex: '-1' }}>
                                 <img className="w-full h-full object-cover"
-                                src="https://keinabeauty.com/wp-content/uploads/2021/06/DSCF0705.jpg"
+                                src="/images/Products/DSCF0705.jpg"
                                 />
                             </div>
                         </div>

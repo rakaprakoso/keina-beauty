@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Ecommerce\ProductController;
+use App\Http\Controllers\Ecommerce\CartController;
+use App\Http\Controllers\AjaxController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,5 +19,20 @@ use App\Http\Controllers\Ecommerce\ProductController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group([
+    'as' => 'ajax.',
+    'prefix'=>'ajax',
+], function () {
+    // Route::post('/dateFormat', 'AjaxController@dateFormat')->name('dateFormat');
+    // Route::post('/coupon', 'AjaxController@coupon')->name('coupon');
+    Route::post('/cart',[AjaxController::class,'addToCart'])->name('addToCart');
+    Route::post('/updateCart', [AjaxController::class,'updateCart'])->name('updateCart');
+});
+
+Route::get('/cart',[CartController::class,'cart'])->name('listCart');
+Route::post('/toCheckout',[AjaxController::class,'cartToCheckout']);
+
+Route::post('/rajaongkir',[AjaxController::class,'rajaongkir']);
 
 Route::resource('admin/product', ProductController::class);

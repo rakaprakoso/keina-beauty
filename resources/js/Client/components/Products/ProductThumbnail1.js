@@ -14,7 +14,7 @@ class ProductThumbnail1 extends Component {
                     <div className="product-content">
                         <div className="image-wrap">
                             <a href="#">
-                            <img src="https://keinabeauty.com/wp-content/uploads/2021/02/DSCF0891_1-500x500.jpg" alt="" />
+                            <img src="/images/Products/KYP_0255-min-500x500.jpg" alt="" />
                             </a>
                         </div>
                         <div className="text-wrap">
