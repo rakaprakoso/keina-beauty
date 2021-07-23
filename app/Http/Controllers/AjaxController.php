@@ -284,9 +284,28 @@ class AjaxController extends Controller
     }
     public function rajaongkir(Request $request)
     {
+        $config['origin'] = 94; // Buleleng
+        $config['weight'] = 700; // Buleleng
+        $config['courier'] = 'jne'; // Buleleng
+        // $config['courier'] = 'jne'; // Buleleng
+
+
         $baseUrl = "https://api.rajaongkir.com/starter/";
-        $parameter = $request->parameter ? "?".$request->parameter : null;
-        $completedUrl = $baseUrl.$request->type.$parameter;
+        $completedUrl = null;
+        if ($request->type=='cost') {
+            // $parameter = $request->parameter ?
+            // "?"
+            // .'destination='.$request->parameter
+            // .'&origin='.$config['origin']
+            // .'&weight='.$config['weight']
+            // .'&courier='.$config['courier']
+
+            // : null;
+            $completedUrl = $baseUrl.$request->type;
+        }else{
+            $parameter = $request->parameter ? "?".$request->parameter : null;
+            $completedUrl = $baseUrl.$request->type.$parameter;
+        }
 
         $curl = curl_init();
 
@@ -297,8 +316,10 @@ class AjaxController extends Controller
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_CUSTOMREQUEST => $request->type=='cost' ? "POST" : "GET",
+            CURLOPT_POSTFIELDS => "origin=".$config['origin']."&destination=".$request->destination."&weight=".$config['weight']."&courier=".$config['courier'],
             CURLOPT_HTTPHEADER => array(
+                "content-type: application/x-www-form-urlencoded",
                 "key: ".$request->key
             ),
         ));

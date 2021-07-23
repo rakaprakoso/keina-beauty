@@ -159,6 +159,9 @@ const Checkout = () => {
 
     const [provinces, setProvinces] = useState(null);
     const [cities, setCities] = useState(null);
+    const [cost, setCost] = useState(null);
+
+    const [totalPrice, setTotalPrice] = useState(null);
 
     useEffect(async () => {
         const data = {
@@ -202,7 +205,62 @@ const Checkout = () => {
             .catch(function (error) {
                 console.log(error);
             });
+
         setCities(dataFetch);
+
+    }
+    async function setupCost(e) {
+        console.log(e.target.value);
+
+        const data = {
+            // id: 12,
+            key: 'd534c6602dfaa12be7ad3b514305eb0a',
+            type:'cost',
+            destination:e.target.value,
+        };
+
+        const dataFetch = await axios
+            .post("/api/rajaongkir", data)
+            .then(function (response) {
+                console.log(response.data.rajaongkir.results);
+                return response.data.rajaongkir.results;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        setCost(dataFetch);
+
+    }
+    function calculateTotal(e) {
+        console.log(e.target.value);
+        console.log(rawData['price']['net_price']);
+        console.log(e.target.selectedOptions[0].getAttribute('data-price'));
+
+        // const data = {
+        //     // id: 12,
+        //     key: 'd534c6602dfaa12be7ad3b514305eb0a',
+        //     type:'cost',
+        //     destination:e.target.value,
+        // };
+
+        // const dataFetch = await axios
+        //     .post("/api/rajaongkir", data)
+        //     .then(function (response) {
+        //         console.log(response.data.rajaongkir.results);
+        //         return response.data.rajaongkir.results;
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
+
+        // const total = 200000;
+
+        setTotalPrice([
+            rawData['price']['net_price'] + parseInt(e.target.selectedOptions[0].getAttribute('data-price')),
+            e.target.selectedOptions[0].getAttribute('data-price'),
+            e.target.value,
+        ]);
+        console.log(totalPrice);
 
     }
 
@@ -219,7 +277,7 @@ const Checkout = () => {
             <div className="page-wrapper py-10">
                 <div>
                     <div className="block mx-6">
-                        <form action="#">
+                        <form action="/api/createOrder" method="POST">
                             <div className="row">
                                 <div className="col-lg-8">
                                     <h2 className="mb-3 text-xl">Billing Details</h2>
@@ -235,7 +293,7 @@ const Checkout = () => {
                                     <label className="text-gray-600 font-light">Address</label>
                                     <textarea name="address" rows="3" placeholder={`Enter Your Address`} className="w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm" />
                                     <label className="text-gray-600 font-light">Province</label>
-                                    <select className="bg-white w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm" onChange={setupCities}>
+                                    <select name="province_id" className="bg-white w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm" onChange={setupCities}>
                                         {provinces ? provinces?.map((item, i) =>
                                             <option className="py-1" value={item.province_id}>{item.province}</option>
                                         ) : <option className="py-1">Loading</option>}
@@ -243,7 +301,7 @@ const Checkout = () => {
 
 
                                     <label className="text-gray-600 font-light">City</label>
-                                    <select className="bg-white w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm">
+                                    <select  name="city_id" className="bg-white w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm" onChange={setupCost}>
                                         {cities ? cities?.map((item, i) =>
                                             <option className="py-1" value={item.city_id}>{item.city_name}</option>
                                         ) : <option className="py-1">Select Province First</option>}
@@ -257,10 +315,13 @@ const Checkout = () => {
                                         <div className="divider mb-5" />
                                         <div className="shipping-cost">
                                             <label className="">Shipping Cost</label>
-                                            <select className="bg-white w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm">
-                                                <option className="py-1">JNE - Rp. 25.000</option>
-                                                <option className="py-1">J&T - Rp. 23.000</option>
-                                                <option className="py-1">TIKI - Rp. 27.000</option>
+                                            <select onChange={calculateTotal} className="bg-white w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm">
+                                            {cost ? cost[0]['costs'].map((item, i) =>
+                                            <option className="py-1" data-price={item.cost[0].value} value={item.service}>{`${item.service} - Rp. ${item.cost[0].value}`}</option>
+                                        ) : <option className="py-1">Select your address first</option>}
+                                                {/* // <option className="py-1">JNE - Rp. 25.000</option>
+                                                // <option className="py-1">J&T - Rp. 23.000</option>
+                                                // <option className="py-1">TIKI - Rp. 27.000</option> */}
                                             </select>
                                         </div>
                                         <table className="w-full rounded-lg mb-4">
@@ -273,7 +334,11 @@ const Checkout = () => {
                                             <tbody className="text-sm">
                                                 {rawData ? rawData?.cart?.map((item, i) =>
                                                     <tr className="border-b">
-                                                        <td>{`${item.name} - x ${rawData.cartSession[item.id]['qty']}`}</td>
+                                                        <td>
+                                                            {`${item.name} - x ${rawData.cartSession[item.id]['qty']}`}
+                                                            <input type="hidden" name="product_id[]" value={item.id}/>
+                                                            <input type="hidden" name="qty[]" value={rawData.cartSession[item.id]['qty']}/>
+                                                        </td>
                                                         <td>Rp. {item.price * rawData.cartSession[item.id]['qty']}</td>
                                                     </tr>
                                                 ) : <tr><td>Loading</td></tr>}
@@ -293,14 +358,15 @@ const Checkout = () => {
                                                 </tr>
                                                 <tr className="border-b">
                                                     <td><strong>Shipping Cost</strong></td>
-                                                    <td>Rp. 25.000</td>
+                                                    <td>Rp. {totalPrice && totalPrice[1]}</td>
                                                 </tr>
                                                 <tr className="border-b">
                                                     <td><strong>Total</strong></td>
-                                                    <td>Rp. 425.000</td>
+                                                    <td>Rp. {totalPrice && totalPrice[0]}</td>
                                                 </tr>
                                             </tfoot>
                                         </table>
+                                        <input type="hidden" name="shipping_method" value={totalPrice && totalPrice[2]} />
                                         <button className="btn btn-primary w-full text-center">
                                             Payment
                                         </button>

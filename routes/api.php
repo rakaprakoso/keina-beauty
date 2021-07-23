@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Ecommerce\ProductController;
 use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\Ecommerce\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,5 +35,7 @@ Route::get('/cart',[CartController::class,'cart'])->name('listCart');
 Route::post('/toCheckout',[AjaxController::class,'cartToCheckout']);
 
 Route::post('/rajaongkir',[AjaxController::class,'rajaongkir']);
+
+Route::post('/createOrder',[OrderController::class,'checkout']);
 
 Route::resource('admin/product', ProductController::class);
