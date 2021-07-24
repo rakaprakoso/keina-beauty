@@ -39,3 +39,6 @@ Route::post('/rajaongkir',[AjaxController::class,'rajaongkir']);
 Route::post('/createOrder',[OrderController::class,'checkout']);
 
 Route::resource('admin/product', ProductController::class);
+
+Route::get('/payment/notification',[OrderController::class,'NotificationAPI'])->name('NotificationAPI');
+Route::post('/payment/notification',[OrderController::class,'postNotificationAPI'])->name('postNotificationAPI');
