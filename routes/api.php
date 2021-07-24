@@ -42,3 +42,4 @@ Route::resource('admin/product', ProductController::class);
 
 Route::get('/payment/notification',[OrderController::class,'NotificationAPI'])->name('NotificationAPI');
 Route::post('/payment/notification',[OrderController::class,'postNotificationAPI'])->name('postNotificationAPI');
+Route::get('/orderStatus',[OrderController::class,'status'])->name('status');

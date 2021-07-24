@@ -12,6 +12,7 @@ import Shop from './pages/Shop'
 import Contact from './pages/Contact'
 import Product from './pages/Ecommerce/Product';
 import {Cart,Checkout} from './pages/Ecommerce/Transactions.module'
+import Order from './pages/Ecommerce/Order';
 
 const Main = props => {
     return (
@@ -30,6 +31,7 @@ const Main = props => {
                 <Route path="/product/:slug" component={Product}/>
                 <Route path="/cart" component={Cart}/>
                 <Route path="/checkout" component={Checkout}/>
+                <Route path="/order" component={Order}/>
 
                 <Route path="/contact" component={Contact}/>
                 <Route component={NotFound} />

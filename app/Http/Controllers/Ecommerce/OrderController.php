@@ -302,7 +302,7 @@ class OrderController extends Controller
         \Midtrans\Config::$isSanitized = true;
         \Midtrans\Config::$is3ds = true;
 
-        $orderId = $request->order;
+        $orderId = $request->order_id;
         $data['order'] = Order::where('order_id', $orderId)->first();
 
         $data['normal_price']=0;
@@ -326,6 +326,8 @@ class OrderController extends Controller
             //return redirect($link);
             //return Response::json($e->getMessage());
         }
+
+        return response()->json($data);
 
         return view('page.eCommerce.order_detail')
         ->with($data);
