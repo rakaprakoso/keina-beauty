@@ -285,7 +285,8 @@ class AjaxController extends Controller
     public function rajaongkir(Request $request)
     {
         $config['origin'] = 94; // Buleleng
-        $config['weight'] = 700; // Buleleng
+        $config['weight'] = $request->weight; // Buleleng
+        // $config['weight'] = 700; // Buleleng
         $config['courier'] = 'jne'; // Buleleng
         // $config['courier'] = 'jne'; // Buleleng
 

@@ -140,6 +140,8 @@ const Checkout = () => {
 
     const [data, setData] = useState(null);
     const [rawData, setRawData] = useState(null);
+    const [weight, setWeight] = useState(null);
+
     useEffect(async () => {
         const dataFetch = await axios
             .get("/api/cart?checkout=true")
@@ -153,6 +155,11 @@ const Checkout = () => {
         // console.log(dataFetch.cartSession[5]);
         setRawData(dataFetch);
         setData(dataFetch.cart);
+        // var tempWeight = 0;
+        // data.forEach((item, i) => {
+        //     tempWeight += rawData.cartSession[item.id]['qty'] * item.weight;
+        // });
+        setWeight(dataFetch.weight);
         // console.log(dataFetch);
         // console.log(rawData);
     }, []);
@@ -160,6 +167,7 @@ const Checkout = () => {
     const [provinces, setProvinces] = useState(null);
     const [cities, setCities] = useState(null);
     const [cost, setCost] = useState(null);
+
 
     const [totalPrice, setTotalPrice] = useState(null);
 
@@ -217,6 +225,7 @@ const Checkout = () => {
             key: 'd534c6602dfaa12be7ad3b514305eb0a',
             type:'cost',
             destination:e.target.value,
+            weight:weight,
         };
 
         const dataFetch = await axios
@@ -335,7 +344,7 @@ const Checkout = () => {
                                                 {rawData ? rawData?.cart?.map((item, i) =>
                                                     <tr className="border-b">
                                                         <td>
-                                                            {`${item.name} - x ${rawData.cartSession[item.id]['qty']}`}
+                                                            {`${item.name} - x ${rawData.cartSession[item.id]['qty']} - ${rawData.cartSession[item.id]['qty'] * item.weight}gr`}
                                                             <input type="hidden" name="product_id[]" value={item.id}/>
                                                             <input type="hidden" name="qty[]" value={rawData.cartSession[item.id]['qty']}/>
                                                         </td>
@@ -367,6 +376,7 @@ const Checkout = () => {
                                             </tfoot>
                                         </table>
                                         <input type="hidden" name="shipping_method" value={totalPrice && totalPrice[2]} />
+                                        <input type="hidden" name="weight" value={weight} />
                                         <button className="btn btn-primary w-full text-center">
                                             Payment
                                         </button>

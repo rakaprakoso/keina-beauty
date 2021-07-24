@@ -86,6 +86,7 @@ class CartController extends Controller
         $data['price']['normal_price']=0;
         $data['price']['discount_price']=0;
         $data['price']['net_price']=0;
+        $data['weight']=0;
 
         if (Auth::guard('user')->check() || Auth::viaRemember()) {
             $data['cart'] = Cart::where('user_id',Auth::guard('user')->user()->id)->first();
@@ -119,6 +120,7 @@ class CartController extends Controller
                 $data['price']['normal_price']+=$value->price*$data['cartSession'][$value->id]['qty'];
                 //$data['price']['discount_price']+=$value->price*$data['cartSession'][$value->id]['qty'];
                 $data['price']['net_price']+=$value->price*$data['cartSession'][$value->id]['qty'];
+                $data['weight']+=$value->weight*$data['cartSession'][$value->id]['qty'];
             }
             $data['cartSession'] = $data['cartSession'];
         }else{

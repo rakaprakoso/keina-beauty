@@ -22,21 +22,49 @@ class OrderController extends Controller
 {
     // use helper;
 
-    private function printShipping($id){
-        $baseUrl = "https://api.rajaongkir.com/starter/city?id=".$id;
+    private function printShipping($destination, $weight, $shipping_method){
+        // $baseUrl = "https://api.rajaongkir.com/starter/city?id=".$id;
+
+        // $curl = curl_init();
+
+        // curl_setopt_array($curl, array(
+        //     CURLOPT_URL => $baseUrl,
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_ENCODING => "",
+        //     CURLOPT_MAXREDIRS => 10,
+        //     CURLOPT_TIMEOUT => 30,
+        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //     CURLOPT_CUSTOMREQUEST => "GET",
+        //     CURLOPT_HTTPHEADER => array(
+        //         "key: d534c6602dfaa12be7ad3b514305eb0a"
+        //     ),
+        // ));
+
+        $config['origin'] = 94; // Buleleng
+        $config['weight'] = $weight; // Buleleng
+        // $config['weight'] = 700; // Buleleng
+        $config['courier'] = 'jne'; // Buleleng
+        // $config['courier'] = 'jne'; // Buleleng
+
+
+        $baseUrl = "https://api.rajaongkir.com/starter/cost";
+        $completedUrl = null;
+        $completedUrl = $baseUrl;
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $baseUrl,
+            CURLOPT_URL => $completedUrl,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_CUSTOMREQUEST =>"POST",
+            CURLOPT_POSTFIELDS => "origin=".$config['origin']."&destination=".$destination."&weight=".$config['weight']."&courier=".$config['courier'],
             CURLOPT_HTTPHEADER => array(
-                "key: d534c6602dfaa12be7ad3b514305eb0a"
+                "content-type: application/x-www-form-urlencoded",
+                "key: d534c6602dfaa12be7ad3b514305eb0a",
             ),
         ));
 
@@ -48,15 +76,25 @@ class OrderController extends Controller
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-             $data = json_decode(trim($response), true)['rajaongkir']['results'];
-             return $data['province'].' - '.$data['type'].' '.$data['city_name'];
+             $rawData = json_decode(trim($response), true)['rajaongkir'];
+             $data['address'] = $rawData['destination_details']['province'].' - '.$rawData['destination_details']['type'].' '.$rawData['destination_details']['city_name'];
+            //  $rawData = json_decode(trim($response), true)['rajaongkir']['results'][0];
+            //  return $rawData;
+             foreach ($rawData['results'][0]['costs'] as $key => $value) {
+                 if ($value['service']==$shipping_method){
+                     $data['cost'] = $value['cost'][0]['value'];
+                     break;
+                 }
+             }
+             return $data;
+             //$data['cost'] =
              // return json_encode($response);
             // return response::json($response);
         }
     }
 
     public function checkout(Request $request){
-        // return $this->printShipping($request->city_id);
+
         // return $request->all();
         //$customer = Customer::where('email', $request->email)->first();
         //return $request;
@@ -71,6 +109,7 @@ class OrderController extends Controller
         $data['price']['discount_price']=0;
         $data['price']['net_price']=0;
         $data['total_qty']=0;
+        $data['weight']=0;
         /*$data['cart'] = Cart::where('user_id',Auth::guard('user')->user()->id)->first();
         $data['cart'] = $data['cart']!=null ? $data['cart']->cart_detail : null;
         if ($data['cart']!=null) {
@@ -109,7 +148,7 @@ class OrderController extends Controller
         $order->emailBuyer=$request->email;
         $order->addressBuyer=$request->address;
         $order->shippingMethod=$request->shipping_method;
-        $order->shippingAddressBuyer= $this->printShipping($request->city_id);
+
 
         $order->save();
 
@@ -133,7 +172,14 @@ class OrderController extends Controller
             // $data['price']['discount_price']=$data['total_qty']*$this->shop_config['markup_price'];
             // $data['price']['net_price']= $data['price']['normal_price']-$data['price']['discount_price'];
             $data['price']['net_price']+=$product->price*$request->qty[$key];
+            $data['weight']+=$product->weight*$request->qty[$key];
         }
+
+        $shippingData = $this->printShipping($request->city_id,$data['weight'],$request->shipping_method);
+        $order->shippingAddressBuyer= $shippingData['address'];
+        $order->shipping_cost= $shippingData['cost'];
+
+        $order->save();
 
         //Commission
         // $data['parent']=[$coupon_applied->id];
@@ -191,7 +237,7 @@ class OrderController extends Controller
         $params = array(
             'transaction_details' => array(
                 'order_id' =>  $order->order_id,
-                'gross_amount' => $data['price']['net_price'],
+                'gross_amount' => $data['price']['net_price'] + $shippingData['cost'],
             ),
             'customer_details' => array(
                 // 'first_name' => Auth::guard('user')->user()->name,
@@ -210,6 +256,8 @@ class OrderController extends Controller
             $payment->midtrans_order_id=$midtrans_order->token;
             $payment->midtrans_transaction_id=$order->order_id;
             $payment->total_price=$data['price']['net_price'];
+            $payment->shipping_price=$shippingData['cost'];
+
             $payment->save();
 
             return redirect($midtrans_order->redirect_url);
