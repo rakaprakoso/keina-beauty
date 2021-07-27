@@ -12,9 +12,9 @@ class ProductThumbnail1 extends Component {
             <div className={`product-container column-${this.props.columns}`}>
                 {this.props.data.map((item, i) => (
                     <div className="product-content">
-                        <div className="image-wrap">
-                            <a href="#">
-                            <img src="/images/Products/KYP_0255-min-500x500.jpg" alt="" />
+                        <div className="image-wrap embed-responsive responsive-1by1">
+                            <a href={`/product/${item.id}`}>
+                            <img className="object-cover object-center" src={item.thumbnail_img} alt={item.name} />
                             </a>
                         </div>
                         <div className="text-wrap">

@@ -9,7 +9,7 @@
     .product-price{
         @apply text-xl font-medium mb-2;
     }
-    .product-shor-desc{
+    .product-short-desc{
         @apply text-justify mb-3;
     }
     .category{
@@ -73,14 +73,16 @@
         @apply bg-transparent border-primaryDark border-b;
     }
 
-    .full-description{
-        p{
-            @apply mb-4;
-        }
-        ol,
-        ul{
-            padding-left: calc(1rem + 3px);
-            list-style: revert;
-        }
+}
+
+.full-description,
+.product-short-desc{
+    p{
+        @apply mb-4;
+    }
+    ol,
+    ul{
+        padding-left: calc(1rem + 3px);
+        list-style: revert;
     }
 }

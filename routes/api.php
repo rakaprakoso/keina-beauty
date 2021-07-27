@@ -6,6 +6,8 @@ use App\Http\Controllers\Ecommerce\ProductController;
 use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\Ecommerce\OrderController;
+
+use App\Http\Controllers\Ecommerce\Admin\ProductController as AdminProductController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,9 +19,20 @@ use App\Http\Controllers\Ecommerce\OrderController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+
+
+Route::group([
+    'as' => 'admin.',
+    'prefix'=>'admin',
+    // 'middleware' => 'auth',
+], function () {
+    Route::resource('product', AdminProductController::class);
 });
+
 
 Route::group([
     'as' => 'ajax.',
@@ -38,7 +51,8 @@ Route::post('/rajaongkir',[AjaxController::class,'rajaongkir']);
 
 Route::post('/createOrder',[OrderController::class,'checkout']);
 
-Route::resource('admin/product', ProductController::class);
+
+Route::resource('/product', ProductController::class);
 
 Route::get('/payment/notification',[OrderController::class,'NotificationAPI'])->name('NotificationAPI');
 Route::post('/payment/notification',[OrderController::class,'postNotificationAPI'])->name('postNotificationAPI');

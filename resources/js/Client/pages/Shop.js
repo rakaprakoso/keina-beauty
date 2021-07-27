@@ -28,7 +28,7 @@ class Shop extends Component {
     }
 
     componentDidMount() {
-        fetch("/api/admin/product")
+        fetch("/api/product")
             .then(res => res.json())
             .then(
                 (result) => {

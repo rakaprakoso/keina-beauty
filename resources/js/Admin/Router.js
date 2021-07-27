@@ -12,6 +12,7 @@ import {Helmet} from "react-helmet";
 // import {Cart,Checkout} from './pages/Ecommerce/Transactions.module'
 import Dashboard from './views/admin/Dashboard'
 import Admin from './layouts/Admin'
+import AdminMain from './layouts/AdminMain'
 
 const Main = props => {
     return (
@@ -21,6 +22,7 @@ const Main = props => {
             </Helmet>
             <Switch>
                 <Route exact path="/admin/" component={Admin}/>
+                <Route path="/admin/product" component={AdminMain}/>
                 <Route path="/admin/dashboard" component={Home}/>
                 {/* <Route path="/about" component={About} />
                 <Route path="/shop" component={Shop} />

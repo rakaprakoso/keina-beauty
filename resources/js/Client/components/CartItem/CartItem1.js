@@ -3,7 +3,7 @@ import React, { useState }from 'react'
 const CartItem1 = (props, cb) => {
     console.log(props.data);
     // console.log(props.quantity);
-    const {name,price, id} = props.data;
+    const {name,price, thumbnail_img, id} = props.data;
     // const quantity2 = quantity;
     const [qty, setQty] = useState(props.quantity);
 
@@ -16,7 +16,7 @@ const CartItem1 = (props, cb) => {
             <tr className="w-full font-light text-gray-700 bg-gray-100 whitespace-no-wrap border border-b-0">
                 <td className="px-4 py-4">
                     {/* <input className="inline-block mr-3" type="checkbox" name={`product-1`} id="" /> */}
-                    <img className="h-10 w-10 rounded-full inline-block mr-4" src="https://keinabeauty.com/wp-content/uploads/2021/02/DSCF0891_1-600x929.jpg" alt="" />
+                    <img className="h-10 w-10 rounded-full inline-block mr-4 overflow-hidden" src={thumbnail_img} alt={name} />
                     {name}
                 </td>
                 <td className="px-4 py-4">Rp. {price}</td>

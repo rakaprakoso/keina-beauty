@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom';
 import { useHistory, useLocation } from "react-router-dom";
 
-import { IoCartOutline, IoHeartOutline, IoEnterOutline } from "react-icons/io5";
+import { IoCartOutline, IoHeartOutline, IoEnterOutline, IoDocumentTextOutline } from "react-icons/io5";
 import { FiMenu, FiChevronsRight } from "react-icons/fi";
 
 import { Navigation } from 'react-minimal-side-navigation';
@@ -189,16 +189,20 @@ const dataHeader = [
 ]
 
 const dataIconHeader = [
-    {
-        path: '/favorites',
-        icon: <IoHeartOutline />,
-    },
+    // {
+    //     path: '/favorites',
+    //     icon: <IoHeartOutline />,
+    // },
     {
         path: '/cart',
         icon: <IoCartOutline />,
     },
     {
-        path: '/login',
-        icon: <IoEnterOutline />,
+        path: '/order',
+        icon: <IoDocumentTextOutline />,
     },
+    // {
+    //     path: '/login',
+    //     icon: <IoEnterOutline />,
+    // },
 ]

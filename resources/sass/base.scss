@@ -98,6 +98,9 @@ ul.slider {
     &.responsive-16by9{
         padding-bottom:56.25%;
     }
+    &.responsive-1by1{
+        padding-bottom:100%;
+    }
     embed,img,video,iframe {
         @apply absolute w-full h-full top-0;
     }

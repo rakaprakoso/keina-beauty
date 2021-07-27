@@ -1,4 +1,5 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState, Fragment } from 'react'
+import parse from 'html-react-parser';
 import ReactDOM from "react-dom";
 import { useHistory, useParams } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -27,7 +28,7 @@ class Product extends Component {
         };
     }
 
-    toggleButton(condition){
+    toggleButton(condition) {
         this.setState({
             setAlert: condition,
         });
@@ -59,7 +60,7 @@ class Product extends Component {
     //Fetch Data
     componentDidMount() {
         // const slug = ;
-        fetch('/api/admin/product/' + this.props.match.params.slug)
+        fetch('/api/product/' + this.props.match.params.slug)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -103,14 +104,19 @@ class Product extends Component {
                             <div className="row">
                                 <div className="col-lg-6">
                                     <div className="thumbnail-img">
-                                        <img src="https://keinabeauty.com/wp-content/uploads/2021/02/DSCF0891_1-600x929.jpg" alt="" />
+                                        <div className="embed-responsive responsive-1by1">
+                                            <img className="object-cover object-center" src={item.thumbnail_img} alt="" />
+                                            </div>
                                     </div>
                                 </div>
                                 <div className="col-lg-6 flex items-center">
                                     <div className="product-brief">
                                         <h1 className="product-name">{item.name}</h1>
                                         <h2 className="product-price">Rp. {item.price}</h2>
-                                        <h3 className="product-shor-desc">{item.description}</h3>
+                                        <div className="product-short-desc">
+                                            {item.short_description && parse(item.short_description)}
+                                        </div>
+
                                         <div className="category">
                                             <strong>
                                                 Category :
@@ -126,33 +132,33 @@ class Product extends Component {
                                                 </a>
                                             </span>
                                         </div>
-                                        <div className="direct-contact">
+                                        {/* <div className="direct-contact">
                                             <a href="#" className="btn whatsapp hvr hvr-icon-pulse-shrink">
                                                 <span className="icon">
                                                     <FaWhatsapp className="hvr-icon" />
                                                 </span>
                                                 #TanyaKeina
                                             </a>
-                                        </div>
+                                        </div> */}
                                         <div className="actions">
-                                            <button className="btn add-to-fav hvr hvr-icon-pulse">
+                                            {/* <button className="btn add-to-fav hvr hvr-icon-pulse">
                                                 <span className="icon">
                                                     <IoHeartOutline className="hvr-icon " />
                                                 </span>
                                                 Add to Favorites
-                                            </button>
+                                            </button> */}
                                             <button onClick={() => this.addToCart()} className="btn add-to-cart hvr hvr-icon-forward">
                                                 <span className="icon">
                                                     <IoCart className="hvr-icon " />
                                                 </span>
                                                 Add to Cart
                                             </button>
-                                            <button className="btn buy-now hvr hvr-icon-forward">
+                                            {/* <button className="btn buy-now hvr hvr-icon-forward">
                                                 <span className="icon">
                                                     <IoBagHandle className="hvr-icon " />
                                                 </span>
                                                 Buy Now
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </div>
                                 </div>
@@ -165,37 +171,16 @@ class Product extends Component {
                                         <Tabs>
                                             <TabList>
                                                 <Tab>Mengapa memilih kami ?</Tab>
-                                                <Tab>Review</Tab>
+                                                {/* <Tab>Review</Tab> */}
                                             </TabList>
 
                                             <TabPanel>
                                                 <div className="full-description">
                                                     <div className="row">
                                                         <div className="col-lg-8 flex items-center">
-                                                            <div>
-                                                                <h4>Mengapa Memilih Produk Kami?</h4>
-                                                                <p>
-                                                                    <ul>
-                                                                        <li>Menggunakan bahan alami pilihan dan kandungan sun protection up to SPF 50 PA +++</li>
-                                                                        <li>Tanpa kandungan zat kimia berbahaya (Bebas kandungan Sulfat, Paraben, zat pewarna buatan, T.E.A., D.E.A., PEGs. Ethoxylate dan Formaldehyde)</li>
-                                                                        <li>Tanpa zat pewangi sintetis</li>
-                                                                        <li>Tanpa uji coba pada hewan</li>
-                                                                        <li> Mendukung terwujudnya Clean Beauty, dimana produk kami tidak hanya aman untuk manusia, tetapi juga aman untuk alam dan bumi.</li>
-                                                                    </ul>
-                                                                </p>
-                                                                <h4> Cara menggunakan Protecting CC Cream:</h4>
-
-                                                                <p>
-                                                                    <ol>
-                                                                        <li>Gunakan setelah Reviving Facial Wash, Calming Cy-Essence dan Cy-Brightening Moisturizer Cream.</li>
-                                                                        <li>Ambil krim secukupnya menggunakan jari atau brush</li>
-                                                                        <li>Aplikasikan merata di wajah hingga leher dan telinga</li>
-                                                                        <li>Pemakaian dapat diulangi sepanjang hari.</li>
-                                                                    </ol>
-                                                                </p>
-                                                            </div>
+                                                            <div>{parse(item.description)}</div>
                                                         </div>
-                                                        <div className="col-lg-4 flex items-center">
+                                                        {/* <div className="col-lg-4 flex items-center">
                                                             <div className="px-0 lg:px-10 py-0 lg:py-3">
                                                                 <div className="row">
                                                                     <div className="col-4">
@@ -219,14 +204,15 @@ class Product extends Component {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                     */}
                                                     </div>
 
-                                                    <div className="px-0 lg:px-44">
+                                                    {/* <div className="px-0 lg:px-44">
                                                         <div className="embed-responsive responsive-16by9">
                                                             <iframe src="https://www.youtube.com/embed/BvZHQaK8Wdg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                                 <div className="testimonials">
                                                     <div className="testimonial-1 py-4 md:py-12">
@@ -266,9 +252,9 @@ class Product extends Component {
 
                                                 </div>
                                             </TabPanel>
-                                            <TabPanel>
+                                            {/* <TabPanel>
                                                 <h2>Any content 2</h2>
-                                            </TabPanel>
+                                            </TabPanel> */}
                                         </Tabs>
                                     </div>
                                 </div>

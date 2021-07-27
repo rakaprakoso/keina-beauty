@@ -17,17 +17,20 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/admin/{path?}', function () {
 //     return view('index_admin');
 // })->middleware(['auth'])->name('admin');
-Route::view('/admin/{path?}', 'index_admin')->where('path', '([A-z\d\-\/_.]+)?');
+require __DIR__.'/auth.php';
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+Route::view('/admin/{path?}', 'index_admin')->where('path', '([A-z\d\-\/_.]+)?')->middleware(['auth']);
+
 
 Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function () {
     Route::view('/{path?}', 'index')->where('path', '([A-z\d\-\/_.]+)?');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
 
-// require __DIR__.'/auth.php';
+
 // Route::view('/{any}', 'index')->where('any', '.*');
 // Route::get('/', [PageController::class, 'home']);
 
