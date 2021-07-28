@@ -93,12 +93,14 @@ class Product extends Component {
             return (
 
                 <>
-                    <div className={`alert flex w-full fixed z-30 bottom-0 pb-10 ${setAlert ? "block" : "hidden"}`}>
-                        <div className="text m-auto bg-gray-200 shadow p-3 relative">
-                            <button className="absolute right-0 top-0" onClick={() => this.toggleButton(!setAlert)}>X</button>
-                            Product Has Been Add
+
+                    <div className={`alert flex w-full fixed z-30 pb-16 duration-500 ${setAlert ? "opacity-1 bottom-0" : "opacity-0 -bottom-full"}`}>
+                        <div className="text m-auto bg-primary text-gray-50 font-bold shadow py-3 px-4 relative">
+                            <button className="absolute -top-4 -right-4 bg-red-700 leading-7 w-7 h-7 rounded-full" onClick={() => this.toggleButton(!setAlert)}>X</button>
+                            Product Added to Cart
                         </div>
                     </div>
+
                     <div className="page-wrapper">
                         <section className="py-10">
                             <div className="row">
@@ -117,7 +119,7 @@ class Product extends Component {
                                             {item.short_description && parse(item.short_description)}
                                         </div>
 
-                                        <div className="category">
+                                        {/* <div className="category">
                                             <strong>
                                                 Category :
                                             </strong>
@@ -131,7 +133,7 @@ class Product extends Component {
                                                     Treatment
                                                 </a>
                                             </span>
-                                        </div>
+                                        </div> */}
                                         {/* <div className="direct-contact">
                                             <a href="#" className="btn whatsapp hvr hvr-icon-pulse-shrink">
                                                 <span className="icon">

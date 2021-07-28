@@ -131,6 +131,27 @@ class AjaxController extends Controller
             return Response::json(["data" => $message])->cookie($cookie);
         }
     }
+    public function deleteCart(Request $request)
+    {
+        $this->validate($request, [
+            'product_id' => 'required|exists:products,id',
+        ]);
+
+
+            // $message['status']="login";
+            // $message['url']=route('user.login', ['nextURL' => url()->previous()]);;
+            // return Response::json($message);
+
+            $cart = json_decode($request->cookie('cart'), true);
+            if ($cart && array_key_exists($request->product_id, $cart)) {
+                // array_splice($cart, $request->product_id, 1);
+                unset($cart[$request->product_id]);
+            }
+            $cookie = cookie('cart', json_encode($cart), 60 * 24 * 5);
+            $message = "Product Added to Cookie!";
+            return redirect('/api/cart')->cookie($cookie);
+            return Response::json(["data" => $message])->cookie($cookie);
+    }
 
     public function cartToCheckout(Request $request)
     {

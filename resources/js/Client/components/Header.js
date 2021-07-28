@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom';
 import { useHistory, useLocation } from "react-router-dom";
+import axios from "axios"
 
 import { IoCartOutline, IoHeartOutline, IoEnterOutline, IoDocumentTextOutline } from "react-icons/io5";
 import { FiMenu, FiChevronsRight } from "react-icons/fi";
@@ -18,6 +19,24 @@ export const Header = () => {
     const history = useHistory();
     const location = useLocation();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    const [cartCounter, setCartCounter] = useState(null);
+
+    useEffect(async () => {
+        const dataFetch = await axios
+            .get("/api/cart")
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
+        setCartCounter(dataFetch.qtyTotal);
+        // setData(dataFetch.cart);
+    }, []);
 
     return (
         <header className="site-header">
@@ -45,6 +64,12 @@ export const Header = () => {
                                     <a href={item.path}>
                                         <div className="icon icon-hvr">
                                             {item.icon}
+                                        </div>
+                                        <div className={`counter bg-red-700
+                                        text-gray-50 w-4 h-4 text-xs rounded-full
+                                        absolute right-1 top-1 text-center
+                                        ${item.counter ? '' : 'hidden'}`}>
+                                            {cartCounter}
                                         </div>
                                     </a>
                                 </li>
@@ -98,19 +123,25 @@ export const Header = () => {
                             }
                         </ul>
                     </nav>
-                    <div className="divider"/>
-                                        <div className="flex justify-center">
+                    <div className="divider" />
+                    <div className="flex justify-center">
                         <ul className="icon-nav">
-                                {dataIconHeader.map((item, i) => (
-                                    <li>
-                                        <a href={item.path}>
-                                            <div className="icon icon-hvr">
-                                                {item.icon}
-                                            </div>
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
+                            {dataIconHeader.map((item, i) => (
+                                <li>
+                                    <a href={item.path}>
+                                        <div className="icon icon-hvr">
+                                            {item.icon}
+                                        </div>
+                                        <div className={`counter bg-red-700
+                                        text-gray-50 w-4 h-4 text-xs rounded-full
+                                        absolute right-1 top-1 text-center
+                                        ${item.counter ? '' : 'hidden'}`}>
+                                            {cartCounter}
+                                        </div>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
 
@@ -196,10 +227,12 @@ const dataIconHeader = [
     {
         path: '/cart',
         icon: <IoCartOutline />,
+        counter: true,
     },
     {
         path: '/order',
         icon: <IoDocumentTextOutline />,
+        counter: false,
     },
     // {
     //     path: '/login',

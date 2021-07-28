@@ -45,6 +45,7 @@ Route::group([
 });
 
 Route::get('/cart',[CartController::class,'cart'])->name('listCart');
+Route::get('/deleteCart',[AjaxController::class,'deleteCart'])->name('deleteCart');
 Route::post('/toCheckout',[AjaxController::class,'cartToCheckout']);
 
 Route::post('/rajaongkir',[AjaxController::class,'rajaongkir']);

@@ -3,6 +3,7 @@ import { Editor as TinyMCE } from '@tinymce/tinymce-react';
 
 const TinyMCEForm = (props) => {
     const name = props.name;
+    const value = props.value;
 
     const editorRef = useRef(null);
     const log = () => {
@@ -16,7 +17,7 @@ const TinyMCEForm = (props) => {
             textareaName={name}
             tinymceScriptSrc="/vendor/tinymce/tinymce.min.js"
             onInit={(evt, editor) => editorRef.current = editor}
-            initialValue=""
+            initialValue={value}
             init={{
                 height: 500,
                 menubar: false,

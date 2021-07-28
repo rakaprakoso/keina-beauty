@@ -30,10 +30,10 @@ const Modify = () => {
         // setRawData(dataFetch);
         if (dataFetch.status == 200) {
             setData(dataFetch.data);
-            console.log(dataFetch.data);
+            // console.log(dataFetch.data);
         } else {
             setData(dataFetch);
-            console.log(dataFetch);
+            // console.log(dataFetch);
         }
     }, []);
 
@@ -44,13 +44,52 @@ const Modify = () => {
         }
     };
 
+    const dataForm = [
+        {
+            name: 'name',
+            label: 'Name',
+            type: 'text',
+            value: data?.name,
+        },
+        {
+            name: 'price',
+            label: 'Price',
+            type: 'number',
+            value: data?.price,
+        },
+        {
+            name: 'weight',
+            label: 'Weight (gr)',
+            type: 'number',
+            value: data?.weight,
+        },
+        {
+            name: 'short_description',
+            label: 'Short Description',
+            type: 'tinyMCE',
+            value: data?.short_description,
+        },
+        {
+            name: 'description',
+            label: 'Long Description',
+            type: 'tinyMCE',
+            value: data?.description,
+        },
+        {
+            name: 'image',
+            label: 'Image',
+            type: 'file',
+        },
+    ]
+
+
     return (
         <div className="w-full">
             <form action="/api/admin/product" method="POST" enctype="multipart/form-data">
                 <div>
                     <h2>{id}</h2>
                     {dataForm && dataForm.map((item, i) => (
-                        <Form data={item} />
+                        <Form list={item}/>
                     ))
                     }
                     {/* <CKEditor
@@ -104,35 +143,3 @@ const Modify = () => {
 
 export default Modify
 
-const dataForm = [
-    {
-        name: 'name',
-        label: 'Name',
-        type: 'text',
-    },
-    {
-        name: 'price',
-        label: 'Price',
-        type: 'number',
-    },
-    {
-        name: 'weight',
-        label: 'Weight (gr)',
-        type: 'number',
-    },
-    {
-        name: 'short_description',
-        label: 'Short Description',
-        type: 'tinyMCE',
-    },
-    {
-        name: 'description',
-        label: 'Long Description',
-        type: 'tinyMCE',
-    },
-    {
-        name: 'image',
-        label: 'Image',
-        type: 'file',
-    },
-]

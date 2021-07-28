@@ -246,6 +246,7 @@ class OrderController extends Controller
                 // 'email' => Auth::guard('user')->user()->email,
                 'first_name' => $request->name,
                 'email' => $request->email,
+                'phone_number' => $request->phone_number,
             ),
         );
 
@@ -262,7 +263,8 @@ class OrderController extends Controller
 
             $payment->save();
 
-            return redirect($midtrans_order->redirect_url);
+            $cookie = \Cookie::forget('cart');
+            return redirect($midtrans_order->redirect_url)->withCookie($cookie);
             // Redirect to Snap Payment Page
             header('Location: ' . $paymentUrl);
         } catch (Exception $e) {

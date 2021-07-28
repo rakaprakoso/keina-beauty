@@ -47,6 +47,23 @@ const Cart = () => {
         // console.log(rawData);
     }, []);
 
+    const handleCallback = async (childData) =>{
+        console.log(childData);
+
+        const dataFetch = await axios
+            .get(`/api/deleteCart?product_id=${childData}`)
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        // console.log(dataFetch.cartSession[5]);
+        setRawData(dataFetch);
+        setData(dataFetch.cart);
+
+    }
 
     return (
         <>
@@ -73,11 +90,11 @@ const Cart = () => {
                                 </thead>
                                 <tbody>
                                     {rawData ? rawData?.cart?.map((item, i) =>
-                                        <CartItem1 data={item} quantity={rawData.cartSession[item.id]['qty']} />
-                                    ) : <tr><td>Loading</td></tr>}
+                                        <CartItem1 data={item} quantity={rawData.cartSession[item.id]['qty']} parentCallback = {handleCallback} />
+                                    ) : <tr className="p-4 border"><td colSpan={4} className="p-4 text-center">Loading</td></tr>}
 
                                     {rawData?.cart === null ?
-                                        <tr><td colSpan={4} className="text-center">Data Not Found</td></tr>
+                                        <tr className="p-4 border"><td colSpan={4} className="p-4 text-center">Data Not Found</td></tr>
                                         :
                                         null
                                     }
@@ -103,7 +120,7 @@ const Cart = () => {
                             </table>
                             <div className="flex mt-4">
                                 <div className="actions ml-auto">
-                                    <a className="btn btn-outline-primary" href="#">
+                                    <a className="btn btn-outline-primary" href="/shop">
                                         Continue Shop
                                     </a>
                                     <button type="submit" className="btn btn-primary">
@@ -127,14 +144,17 @@ const Checkout = () => {
         {
             label: 'Name',
             name: 'name',
+            type: 'text',
         },
         {
             label: 'Phone Number',
             name: 'phone_number',
+            type: 'text',
         },
         {
             label: 'Email Address',
             name: 'email',
+            type: 'email',
         },
     ]
 
@@ -295,14 +315,15 @@ const Checkout = () => {
                                         <>
 
                                             <label className="text-gray-600 font-light">{item.label}</label>
-                                            <input name={item.name} placeholder={`Enter Your ${item.label}`} className="w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm" />
+                                            <input required name={item.name} type={item.type} placeholder={`Enter Your ${item.label}`} className="w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm" />
 
                                         </>
                                     ))}
                                     <label className="text-gray-600 font-light">Address</label>
-                                    <textarea name="address" rows="3" placeholder={`Enter Your Address`} className="w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm" />
+                                    <textarea required name="address" rows="3" placeholder={`Enter Your Address`} className="w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm" />
                                     <label className="text-gray-600 font-light">Province</label>
-                                    <select name="province_id" className="bg-white w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm" onChange={setupCities}>
+                                    <select required name="province_id" className="bg-white w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm" onChange={setupCities}>
+                                        <option className="py-1">Select Province</option>
                                         {provinces ? provinces?.map((item, i) =>
                                             <option className="py-1" value={item.province_id}>{item.province}</option>
                                         ) : <option className="py-1">Loading</option>}
@@ -310,9 +331,11 @@ const Checkout = () => {
 
 
                                     <label className="text-gray-600 font-light">City</label>
-                                    <select  name="city_id" className="bg-white w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm" onChange={setupCost}>
+                                    <select required name="city_id" className="bg-white w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm"
+                                    onChange={setupCost}>
+                                        <option className="py-1">Select City</option>
                                         {cities ? cities?.map((item, i) =>
-                                            <option className="py-1" value={item.city_id}>{item.city_name}</option>
+                                            <option className="py-1" value={item.city_id}>{`${item.type} ${item.city_name}`}</option>
                                         ) : <option className="py-1">Select Province First</option>}
                                     </select>
 
@@ -324,7 +347,8 @@ const Checkout = () => {
                                         <div className="divider mb-5" />
                                         <div className="shipping-cost">
                                             <label className="">Shipping Cost</label>
-                                            <select onChange={calculateTotal} className="bg-white w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm">
+                                            <select required onChange={calculateTotal} className="bg-white w-full mt-2 mb-6 px-4 py-2 border rounded-sm text-gray-700 focus:outline-none focus:border-primary text-sm">
+                                            <option className="py-1">Select shipping cost</option>
                                             {cost ? cost[0]['costs'].map((item, i) =>
                                             <option className="py-1" data-price={item.cost[0].value} value={item.service}>{`${item.service} - Rp. ${item.cost[0].value}`}</option>
                                         ) : <option className="py-1">Select your address first</option>}
@@ -375,8 +399,8 @@ const Checkout = () => {
                                                 </tr>
                                             </tfoot>
                                         </table>
-                                        <input type="hidden" name="shipping_method" value={totalPrice && totalPrice[2]} />
-                                        <input type="hidden" name="weight" value={weight} />
+                                        <input required type="hidden" name="shipping_method" value={totalPrice && totalPrice[2]} />
+                                        <input required type="hidden" name="weight" value={weight} />
                                         <button className="btn btn-primary w-full text-center">
                                             Payment
                                         </button>
