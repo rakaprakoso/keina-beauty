@@ -114,59 +114,60 @@ const Order = () => {
                                             </table>
                                         }
 
-                                        <table className="w-full text-left rounded-lg">
-                                            <thead>
-                                                <tr className="text-gray-800 border border-b-0">
-                                                    <th className="px-4 py-3">Product</th>
-                                                    <th className="px-4 py-3">Price</th>
-                                                    <th className="px-4 py-3">Quantity</th>
-                                                    <th className="px-4 py-3">Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {data ? data?.order.order_details?.map((item, i) =>
-                                                    <tr className="w-full font-light text-gray-700 bg-gray-100 whitespace-no-wrap border border-b-0">
-                                                        <td className="px-4 py-4">
-                                                            {/* <input className="inline-block mr-3" type="checkbox" name={`product-1`} id="" /> */}
-                                                            <img className="h-10 w-10 rounded-full inline-block mr-4" src={item.product.thumbnail_img} alt={item.name}/>
-                                                            {item.product_id}
-                                                        </td>
-                                                        <td className="px-4 py-4">Rp. {item.price}</td>
-                                                        <td className="px-4 py-4">
-                                                            {item.qty}
-                                                        </td>
-                                                        <td className="px-4 py-4">
-                                                            Rp. {item.price * item.qty}
-                                                        </td>
-
+                                        <div className="block overflow-x-auto mb-8 lg:mb-0">
+                                            <table className="w-full text-left rounded-lg">
+                                                <thead>
+                                                    <tr className="text-gray-800 border border-b-0">
+                                                        <th className="px-4 py-3">Product</th>
+                                                        <th className="px-4 py-3">Price</th>
+                                                        <th className="px-4 py-3">Quantity</th>
+                                                        <th className="px-4 py-3">Total</th>
                                                     </tr>
-                                                ) : <tr><td>Loading</td></tr>}
+                                                </thead>
+                                                <tbody>
+                                                    {data ? data?.order.order_details?.map((item, i) =>
+                                                        <tr className="w-full font-light text-gray-700 bg-gray-100 whitespace-no-wrap border border-b-0">
+                                                            <td className="px-4 py-4">
+                                                                {/* <input className="inline-block mr-3" type="checkbox" name={`product-1`} id="" /> */}
+                                                                <img className="h-10 w-10 rounded-full inline-block mr-4" src={item.product.thumbnail_img} alt={item.name}/>
+                                                                {item.product.name}
+                                                            </td>
+                                                            <td className="px-4 py-4">Rp. {item.price}</td>
+                                                            <td className="px-4 py-4">
+                                                                {item.qty}
+                                                            </td>
+                                                            <td className="px-4 py-4">
+                                                                Rp. {item.price * item.qty}
+                                                            </td>
 
-                                                {data?.order_details === null ?
-                                                    <tr><td colSpan={4} className="text-center">Data Not Found</td></tr>
-                                                    :
-                                                    null
+                                                        </tr>
+                                                    ) : <tr><td>Loading</td></tr>}
+
+                                                    {data?.order_details === null ?
+                                                        <tr><td colSpan={4} className="text-center">Data Not Found</td></tr>
+                                                        :
+                                                        null
+                                                    }
+
+                                                </tbody>
+                                                {data &&
+                                                    <tfoot className="w-full text-gray-800 bg-gray-50 whitespace-no-wrap">
+                                                        <tr className="border border-b-0">
+                                                            <td className="px-4 py-2 text-right font-bold" colSpan="3">Subtotal</td>
+                                                            <td className="px-4 py-2">Rp. {data.net_price}</td>
+                                                        </tr>
+                                                        <tr className="border border-b-0">
+                                                            <td className="px-4 py-2 text-right font-bold" colSpan="3">Shipping Cost</td>
+                                                            <td className="px-4 py-2">Rp. {data.order.shipping_cost}</td>
+                                                        </tr>
+                                                        <tr className="border">
+                                                            <td className="px-4 py-2 text-right font-bold" colSpan="3">Total</td>
+                                                            <td className="px-4 py-2">Rp. {parseInt(data.net_price) + parseInt(data.order.shipping_cost)}</td>
+                                                        </tr>
+                                                    </tfoot>
                                                 }
-
-                                            </tbody>
-                                            {data &&
-                                                <tfoot className="w-full text-gray-800 bg-gray-50 whitespace-no-wrap">
-                                                    <tr className="border border-b-0">
-                                                        <td className="px-4 py-2 text-right font-bold" colSpan="3">Subtotal</td>
-                                                        <td className="px-4 py-2">Rp. {data.net_price}</td>
-                                                    </tr>
-                                                    <tr className="border border-b-0">
-                                                        <td className="px-4 py-2 text-right font-bold" colSpan="3">Shipping Cost</td>
-                                                        <td className="px-4 py-2">Rp. {data.order.shipping_cost}</td>
-                                                    </tr>
-                                                    <tr className="border">
-                                                        <td className="px-4 py-2 text-right font-bold" colSpan="3">Total</td>
-                                                        <td className="px-4 py-2">Rp. {parseInt(data.net_price) + parseInt(data.order.shipping_cost)}</td>
-                                                    </tr>
-                                                </tfoot>
-                                            }
-                                        </table>
-
+                                            </table>
+                                        </div>
 
                                     </div>
                                     <div className="col-lg-4">
