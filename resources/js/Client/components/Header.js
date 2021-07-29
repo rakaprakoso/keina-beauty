@@ -39,7 +39,7 @@ export const Header = () => {
     }, []);
 
     return (
-        <header className="site-header">
+        <header className="site-header shadow-lg">
             <div className="header-wrapper">
                 <div className="top-part">
                     <div className="head-content">
@@ -209,10 +209,10 @@ const dataHeader = [
             },
         ],
     },
-    {
-        title: 'Article',
-        itemId: '/article',
-    },
+    // {
+    //     title: 'Article',
+    //     itemId: '/article',
+    // },
     {
         title: 'Join Campaign',
         itemId: 'https://lindungihutan.com/keinabeauty',

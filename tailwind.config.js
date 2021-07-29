@@ -19,6 +19,10 @@ module.exports = {
             fontFamily: {
                 sans: ['Poppins','Nunito', ...defaultTheme.fontFamily.sans],
             },
+            padding: {
+                half: '50%',
+                full: '100%',
+            },
         },
     },
 

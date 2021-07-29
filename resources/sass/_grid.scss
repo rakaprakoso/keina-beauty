@@ -1,13 +1,15 @@
 
 
 .row {
-    @apply flex flex-wrap overflow-hidden;
+    @apply flex flex-wrap ;
     margin-left: ($spacing/-2);
     margin-right: ($spacing/-2);
-    // .col-6{
-    //     @apply w-full overflow-hidden lg:px-4 lg:w-1/2;
-    // }
-
+    &.no-gutters{
+        @apply mx-0;
+        &>div{
+            @apply px-0;
+        }
+    }
 
 }
 

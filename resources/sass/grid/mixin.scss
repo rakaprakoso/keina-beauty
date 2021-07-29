@@ -1,7 +1,7 @@
 %col {
     padding-left: ($spacing/2);
     padding-right: ($spacing/2);
-    @apply overflow-hidden;
+
 }
 
 @for $j from 1 through $columns {

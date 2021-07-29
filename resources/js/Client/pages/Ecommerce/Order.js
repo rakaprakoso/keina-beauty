@@ -49,7 +49,7 @@ const Order = () => {
         // setRawData(dataFetch);
         if (dataFetch.status == 200) {
             setData(dataFetch.data);
-            // console.log(dataFetch.data);
+            console.log(dataFetch.data);
         } else {
             setData(dataFetch);
             console.log(dataFetch);
@@ -128,7 +128,7 @@ const Order = () => {
                                                     <tr className="w-full font-light text-gray-700 bg-gray-100 whitespace-no-wrap border border-b-0">
                                                         <td className="px-4 py-4">
                                                             {/* <input className="inline-block mr-3" type="checkbox" name={`product-1`} id="" /> */}
-                                                            <img className="h-10 w-10 rounded-full inline-block mr-4" src="https://keinabeauty.com/wp-content/uploads/2021/02/DSCF0891_1-600x929.jpg" alt="" />
+                                                            <img className="h-10 w-10 rounded-full inline-block mr-4" src={item.product.thumbnail_img} alt={item.name}/>
                                                             {item.product_id}
                                                         </td>
                                                         <td className="px-4 py-4">Rp. {item.price}</td>

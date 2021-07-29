@@ -309,7 +309,8 @@ class OrderController extends Controller
         \Midtrans\Config::$is3ds = true;
 
         $orderId = $request->order_id;
-        $data['order'] = Order::where('order_id', $orderId)->first();
+        $data['order'] = Order::where('order_id', $orderId)
+        ->with('order_details.product')->first();
 
         if ($data['order'] !==null) {
             $data['normal_price'] = 0;
