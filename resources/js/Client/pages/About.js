@@ -92,7 +92,7 @@ function About(props) {
                 </section>
                 <section className="bg-dark my-8">
                     <div className="row no-gutters">
-                        <div className="col-lg-5 bg-center bg-cover" style={{ backgroundImage: 'url("/images/products/DSCF0705-768x609.jpg")', minHeight: '30vh' }} />
+                        <div className="col-lg-5 bg-center bg-cover" style={{ backgroundImage: 'url("/images/Products/DSCF0705-768x609.jpg")', minHeight: '30vh' }} />
                         <div className="col-lg-7 text-gray-50 flex bg-gray-800">
                             <div className="my-auto mx-10 py-9 lg:py-0">
                                 <h2 className="text-3xl">“Perfect Nutrition for Beautiful Skin”</h2>
@@ -162,7 +162,7 @@ function About(props) {
                             <div className="m-5">
                                 <div className="flex">
                                     {featureProducts.map((item, i) => (
-                                        <div className="w-1/3 px-3">
+                                        <div className="w-1/2 lg:w-1/4 px-3">
                                             <img src={item} className="rounded w-full" style={{ objectFit: 'cover', height: '200px' }} alt />
                                         </div>
                                     ))}
