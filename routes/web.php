@@ -3,6 +3,8 @@
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +28,8 @@ Route::view('/admin/{path?}', 'index_admin')->where('path', '([A-z\d\-\/_.]+)?')
 
 
 Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function () {
-    Route::view('/{path?}', 'index')->where('path', '([A-z\d\-\/_.]+)?');
+    Route::get('/{path?}', [PageController::class, 'index'])->where('path', '([A-z\d\-\/_.]+)?');
+    // Route::view('/{path?}', 'index')->where('path', '([A-z\d\-\/_.]+)?');
 });
 
 
