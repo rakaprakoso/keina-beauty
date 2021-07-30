@@ -4,9 +4,9 @@ import Page from '../page';
 
 function Home(props) {
     return (
-        <Page>
+        // <Page>
             <Hero1/>
-        </Page>
+        // </Page>
     );
 }
 
